@@ -6,13 +6,16 @@
 #include <errno.h>
 
 #define chunkptr            struct t_chunk*
-#define ALLOC_MAX_SIZE              
 #define SIZE_SZ             (sizeof (size_t))
 #define MALLOC_ALIGNMENT    16
 #define MALLOC_ALIGN_MASK   (MALLOC_ALIGNMENT - 1)
 #define MIN_CHUNK_SIZE      32
 #define MIN_SMALL_SIZE      1024
 #define MIN_LARGE_SIZE      128 * 1024
+#define MAX_TINY_INDEX      63
+#define MAX_SMALL_INDEX     126
+#define PREV_INUSE          0x1
+#define IS_MMAPPED          0x2
 
 typedef struct s_state {
     pthread_mutex_t mutex;
@@ -21,7 +24,7 @@ typedef struct s_state {
 
     chunkptr  last_remainder;
     
-    chunkptr  bins[254];
+    chunkptr  bins[128];
 } t_state;
 
 struct t_chunk {
