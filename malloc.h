@@ -21,14 +21,11 @@ struct state
     chunkptr last_remainder;
     
     chunkptr bins[254];
-    
-    unsigned int binmap[3];
 };
 
 struct chunk {
-
-  size_t      chunk_prev_size;  
-  size_t      chunk_size;       
+  size_t      prev_size;  
+  size_t      size;       
 
   struct chunk* fd;         
   struct chunk* bk;
