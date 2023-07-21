@@ -22,7 +22,7 @@ struct state
     
     chunkptr bins[254];
     
-    unsigned int binmap[8];
+    unsigned int binmap[3];
 };
 
 struct chunk {
